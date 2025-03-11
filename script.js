@@ -31,7 +31,7 @@ continueButton.onclick = () => {
     quizSection.classList.add("active");
 };
 
-// questions from api
+
 async function fetchQuestions(categoryId) {
     const apiUrl = `https://opentdb.com/api.php?amount=5&category=${categoryId}&type=multiple`;
     try {
@@ -48,7 +48,6 @@ async function fetchQuestions(categoryId) {
     }
 }
 
-// Display current question and its options
 function displayQuestion() {
     if (currentQuestionIndex < questions.length) {
         const currentQuestion = questions[currentQuestionIndex];
@@ -72,7 +71,7 @@ function displayQuestion() {
     }
 }
 
-// Selection of an option
+
 function handleOptionClick(selectedOption, correctAnswer, optionElement) {
     const options = document.querySelectorAll('.option');
     options.forEach(option => {
@@ -83,31 +82,31 @@ function handleOptionClick(selectedOption, correctAnswer, optionElement) {
 
     if (userAnswer === correctAnswer) {
         score++;
-        optionElement.style.backgroundColor = 'green'; // Highlight correct answer
+        optionElement.style.backgroundColor = 'green'; 
     } else {
-        optionElement.style.backgroundColor = 'red'; // Highlight wrong answer
+        optionElement.style.backgroundColor = 'red'; 
         // Show the correct answer
         options.forEach(option => {
             if (option.innerText === correctAnswer) {
-                option.style.backgroundColor = 'green'; // Highlight correct answer
+                option.style.backgroundColor = 'green'; 
             }
         });
     }
 
-    nextButton.disabled = false; // Enable next button after selecting answer
+    nextButton.disabled = false; 
 }
 
 nextButton.onclick = () => {
     currentQuestionIndex++;
-    userAnswer = ''; // Reset 
+    userAnswer = '';
     displayQuestion();
 };
 
 // Final score
 function showScore() {
     questionText.innerHTML = `Quiz Complete! Your score is ${score} out of ${questions.length}.`;
-    optionList.innerHTML = ''; // Clear options
-    nextButton.style.display = 'none'; // Hide the next button on final page
+    optionList.innerHTML = '';
+    nextButton.style.display = 'none'; 
 
     // Restart button 
     const restartButton = document.createElement('button');
@@ -116,14 +115,14 @@ function showScore() {
     restartButton.onclick = () => {
         currentQuestionIndex = 0;
         score = 0;
-        popupInfo.classList.add("active"); // Show the popup info (home page)
-        quizSection.classList.remove("active"); // Hide the quiz section
-        restartButton.remove(); // Remove the restart button after returning to the first page
+        popupInfo.classList.add("active"); 
+        quizSection.classList.remove("active"); 
+        restartButton.remove(); 
     };
     optionList.appendChild(restartButton); 
 }
 
-// Utility function to shuffle the options array
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
